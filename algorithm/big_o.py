@@ -41,19 +41,27 @@ def quadratic_big_o(items: list):
     -> Ketika jumlah runtime / operasi dari fungsi kita adalah sebesar n^2, dimana n adalah jumlah input dari fungsi tersebut.
         Hal tersebut bisa terjadi karena kita menjalankan fungsi linear didalam fungsi linear (n*n).
         (for loop in for loop)
-    """
-    def find_max_price(items: list):
-        max_price = 0
+
+    -> Tetapi tidak mesti dua nested perulangan itu O(n^2)
+    Contoh:
         for i in items: # O(n)
             for j in items: # O(n)
                 if i > j:
-                    max_price = i # O(1)
+                    max_price = i # O(1) - # constant-time operation
 
-        # Total: O(n) * O(n) = O(n2)
-        return max_price
+        Operasi diatas menggunakan O(n), bukan O(n^2). Ini karena,
+        `max_price = i` menggunakan operasi O(1) / constant dan tidak bergantung pada jumlah input
+    """
+    def find_total_price(items: list):
+        total = 0
+        for i in range(len(items)):
+            for j in range(len(items)):
+                total += items[i] * items[j]
+
+        return total
 
     return (
-        ('find_max_price', find_max_price(items))
+        ('find_total_price', find_total_price(items))
     )
 
 def linear_big_o(items: list):
@@ -65,7 +73,16 @@ def linear_big_o(items: list):
         max_price = 0
         for i in items:
             if i > max_price:
-                max_price = i
+                max_price = i # O(1) - # constant-time operation
+
+        return max_price
+
+    def find_max_price_2(items: list):
+        max_price = 0
+        for i in items: # O(n)
+            for j in items: # O(n)
+                if i > j:
+                    max_price = i # O(1) - # constant-time operation
 
         return max_price
 
@@ -82,6 +99,7 @@ def linear_big_o(items: list):
 
     return (
         ('find_max_price', find_max_price(items)),
+        ('find_max_price_2', find_max_price_2(items)),
         ('find_max_price_recurse', find_max_price_recurse(items))
     )
 
