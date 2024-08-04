@@ -33,49 +33,56 @@ Example cases:
 
 """
 
-data = [180, 78, 317]
+data = [78, 180, 317, 512]
 
 def quadratic_big_o(items: list):
     """
-    O(N^2) - Quadratic Time
+    O(n²) - Quadratic Time
     -> Ketika jumlah runtime / operasi dari fungsi kita adalah sebesar n^2, dimana n adalah jumlah input dari fungsi tersebut.
         Hal tersebut bisa terjadi karena kita menjalankan fungsi linear didalam fungsi linear (n*n).
         (for loop in for loop)
     """
-    def find_the_min_or_max_price(items: list):
+    def find_max_price(items: list):
         max_price = 0
-        min_price = 0
-        for i in items:
-            for j in items:
+        for i in items: # O(n)
+            for j in items: # O(n)
                 if i > j:
-                    max_price = i
-                elif i < j:
-                    min_price = i
+                    max_price = i # O(1)
 
-        return min_price, max_price
+        # Total: O(n) * O(n) = O(n2)
+        return max_price
 
     return (
-        ('find_the_min_or_max_price', find_the_min_or_max_price(items))
+        ('find_max_price', find_max_price(items))
     )
 
 def linear_big_o(items: list):
     """
-    O(N) - Linear Time
+    O(n) - Linear Time
     -> Ketika jumlah runtime / operasi dari fungsi kita berbanding lurus dengan jumlah input yang diberikan.
     """
-    def find_the_min_or_max_price(items: list):
+    def find_max_price(items: list):
         max_price = 0
-        min_price = 0
         for i in items:
             if i > max_price:
                 max_price = i
-            elif i < max_price:
-                min_price = i
 
-        return min_price, max_price
+        return max_price
+
+    def find_max_price_recurse(items: list, call = 0):
+        max_price = 0
+
+        n = call + 1
+        if n == len(items):
+            max_price = items[call]
+        if items[call] > max_price:
+            max_price = find_max_price_recurse(items, call + 1)
+
+        return max_price
 
     return (
-        ('find_the_min_or_max_price', find_the_min_or_max_price(items))
+        ('find_max_price', find_max_price(items)),
+        ('find_max_price_recurse', find_max_price_recurse(items))
     )
 
 def constant_big_o(items: list):
@@ -83,16 +90,41 @@ def constant_big_o(items: list):
     O(1) - Constant Time
     -> Banyaknya input yang diberikan kepada sebuah algoritma, tidak akan mempengaruhi waktu proses (runtime) dari algoritma tersebut.
     """
-    def find_the_min_or_max_price(items: list):
-        # Already know which index that have the largest or smallest price
-        # [180, 78, 317] -> Min: index 1, Max: index 2
-        return items[1], items[2]
+    def find_max_price(items: list):
+        # Suppose we already know which index that have the largest or smallest price
+        # [78, 180, 317, 512] -> Max: index 2
+        return items[3] # is constant, meaning it doesn't depend on the input size. Always one step operations
 
     return (
-        ('find_the_min_or_max_price', find_the_min_or_max_price(items))
+        ('find_max_price', find_max_price(items))
     )
 
+def logaritmic_big_o(items: list):
+    """
+    O(log n) - Logarithmic Time
+    -> ketika kita memberikan input sebesar n terhadap sebuah fungsi, jumlah tahapan yang dilakukan oleh fungsi tersebut berkurang berdasarkan suatu faktor.
+    """
+    def find_max_price(items: list) -> int:
+        return _find_max_price(items, 0, len(items) - 1)
+
+    def _find_max_price(items: list, left: int, right: int) -> int:
+        if left == right:
+            return items[left]
+
+        mid = (left + right) // 2
+
+        left_max = _find_max_price(items, left, mid)
+        right_max = _find_max_price(items, mid + 1, right)
+
+        return max(left_max, right_max)
+
+    return (
+        ('find_max_price', find_max_price(items))
+    )
+
+
 def run():
-    print('O(N^2)', quadratic_big_o(data))
-    print('O(N)', linear_big_o(data))
+    print('On²', quadratic_big_o(data))
+    print('O(n)', linear_big_o(data))
     print('O(1)', constant_big_o(data))
+    print('O(log n)', logaritmic_big_o(data))
