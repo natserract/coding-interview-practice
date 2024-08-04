@@ -1,25 +1,25 @@
 
 colors = ['red', 'blue', 'green']
 
-def find_index(d: list, i: int):
-    return d[i]
+def find_index(items: list, i: int):
+    return items[i]
 
-def iterations(d: list):
+def iterations(items: list):
     # for loop
     forloop_iter = []
-    for v in d:
+    for v in items:
         forloop_iter.append(v)
 
     # inline for loop
     forloop_inline_iter = [
-        v for v in d
+        v for v in items
     ]
 
     # while loop
     i = 0
     whileloop_iter = []
-    while i < len(d):
-        whileloop_iter.append(d[i])
+    while i < len(items):
+        whileloop_iter.append(items[i])
         i += 1
 
     return forloop_iter, forloop_inline_iter, whileloop_iter
@@ -31,22 +31,25 @@ def range_list(end = 10):
 
     return values
 
-def insert_list(d: list, value: str):
-    d.insert(len(d), value)
-    return d
+def insert_list(items: list, value: str):
+    items.insert(len(items), value)
+    return items
 
-def concat(d: list, new: list):
-    return d + [*new]
+def concat(items: list, new: list):
+    return items + [*new]
 
-def reverse_list(d: list):
-    values = d.copy()
+def reverse_list(items: list):
+    values = items.copy()
     values.reverse()
     return values
 
-def pop_list(d: list, i: int):
-    values = d.copy()
+def pop_list(items: list, i: int):
+    values = items.copy()
     values.pop(i)
     return values
+
+def range_full(items: list, start: int, end: int):
+    return items[start:end]
 
 def run():
     print('find_index', find_index(colors, 0))
@@ -56,3 +59,4 @@ def run():
     print('concat', concat(colors, ['brown']))
     print('reverse_list', reverse_list(colors))
     print('pop_list', pop_list(colors, 1))
+    print('range_full', range_full(colors, 0, 2))
