@@ -1,148 +1,125 @@
 """
+Big-O Notation adalah sebuah cara atau metode untuk melakukan
+analisa terhadap sebuah algoritma pemrograman terhadap waktu eksekusi.
 
 f(n) =
     - n: size of the input
     - So, n -> operations
 
-Big-O Notation adalah sebuah cara atau metode untuk melakukan
-analisa terhadap sebuah algoritma pemrograman terhadap waktu eksekusi.
+Constant: O(1)
+Linear time: O(n)
+Logarithmic time: O(n log n)
+Quadratic time: O(n^2)
+Exponential time: O(2^n)
+Factorial time: O(n!)
 
 Kompleksitas suatu algoritma dibagi menjadi 2, yaitu Time Complexity dan Space Complexity.
 
 - Time Complexity: seberapa lama waktu yang diperlukan untuk menjalankan suatu algoritma.
 - Space Complexity: seberapa besar memori yang kita gunakan untuk menjalankan suatu algoritma.
 
-Notasi O 	 Istilah Lain    Jumlah Operasi 	Algoritma
-O(n2):	     Quadratic 	     n2 	            Komparasi seluruh harga. Pengulangan dalam pengulangan
-O(n): 	     Linear 	     2n 	            Mencari harga terendah dan tertinggi. 1 kali pengulangan
-O(1): 	     Constant 	     2 	                Asumsi sudah diurut berdasarkan harga, tinggal mencari elemen pertama dan elemen terakhir
-
-Example cases:
-- Mencari harga terendah dan harga tertinggi
-    data = [180, 78, 317]
-
-    1. O(N^2): Quadratic Time Complexity
-    for i in data:
-        for j in data:
-            # Operations
-
-    n 	             3 	 5 	 10 	100
-    Jumlah Operasi 	 9 	25 	 100 	10000
-
-    Semakin banyak datanya semakin signifikan jumlah operasi yang dijalankan.
-
+Steps:
+1. Brute force: yg penting bekerja dl
+2. Finds worst case
+3. Find best case
+4. Optimize
+5. Test
 """
+from typing import Callable
 
-data = [78, 180, 317, 512]
 
-def quadratic_big_o(items: list):
-    """
-    O(n²) - Quadratic Time
-    -> Ketika jumlah runtime / operasi dari fungsi kita adalah sebesar n^2, dimana n adalah jumlah input dari fungsi tersebut.
-        Hal tersebut bisa terjadi karena kita menjalankan fungsi linear didalam fungsi linear (n*n).
-        (for loop in for loop)
-
-    -> Tetapi tidak mesti dua nested perulangan itu O(n^2)
-    Contoh:
-        for i in items: # O(n)
-            for j in items: # O(n)
-                if i > j:
-                    max_price = i # O(1) - # constant-time operation
-
-        Operasi diatas menggunakan O(n), bukan O(n^2). Ini karena,
-        `max_price = i` menggunakan operasi O(1) / constant dan tidak bergantung pada jumlah input
-    """
-    def find_total_price(items: list):
-        total = 0
-        for i in range(len(items)):
-            for j in range(len(items)):
-                total += items[i] * items[j]
-
-        return total
-
-    return (
-        ('find_total_price', find_total_price(items))
-    )
-
-def linear_big_o(items: list):
-    """
-    O(n) - Linear Time
-    -> Ketika jumlah runtime / operasi dari fungsi kita berbanding lurus dengan jumlah input yang diberikan.
-    """
-    def find_max_price(items: list):
-        max_price = 0
-        for i in items:
-            if i > max_price:
-                max_price = i # O(1) - # constant-time operation
-
-        return max_price
-
-    def find_max_price_2(items: list):
-        max_price = 0
-        for i in items: # O(n)
-            for j in items: # O(n)
-                if i > j:
-                    max_price = i # O(1) - # constant-time operation
-
-        return max_price
-
-    def find_max_price_recurse(items: list, call = 0):
-        max_price = 0
-
-        n = call + 1
-        if n == len(items):
-            max_price = items[call]
-        if items[call] > max_price:
-            max_price = find_max_price_recurse(items, call + 1)
-
-        return max_price
-
-    return (
-        ('find_max_price', find_max_price(items)),
-        ('find_max_price_2', find_max_price_2(items)),
-        ('find_max_price_recurse', find_max_price_recurse(items))
-    )
-
-def constant_big_o(items: list):
+def constant_big_o():
     """
     O(1) - Constant Time
     -> Banyaknya input yang diberikan kepada sebuah algoritma, tidak akan mempengaruhi waktu proses (runtime) dari algoritma tersebut.
+
+    Time Complexity: O(1)
+    Penjelasan:
+        a + b => Kenapa O(1), karena operasi ini tidak berjalan berdasarkan seberapa besar nilai inputnya.
+                Melainkan hanya berlaku satu/single operasi alias waktunya constant.
+                Meskipun, nilainya sampai 1000 sekalipun.
+
+                Yang dilihat adalah proses runtime (jumlah operasi) nya, artinya jika memang a + b itu
+                menghabiskan waktu `0.01ms`. Even itu di for loop, `a + b` proses runtimenya tetap `0.01ms`
+                yakni constant / fixed / sama.
+
+                PS:
+                Simplenya, O(1) berjalan berdasarkan performa dari hardware / server bukan dari nilai input.
+                Contoh proses runtime yang berjalan berdasarkan nilai input,
+
+                    Example 1:
+                    def length(items: list):
+                        total = 0
+                        for i in items:
+                            total += 1
+                        return total
+
+                    -> length([1, 2, 4]) # 3
+
+                    Example 2:
+                    def map(items: list, fn: Callable):
+                        return [fn(v) for v in items]
+
+                    -> map([1, 2, 3], lambda x: x + 1) # 2, 3, 4
+
+    >> O(1): "One operation at a time"
+
+    Contoh Time Complexity - O(1) lainnya:
+        - return True
+        - Array.push()
+        - Array.indexOf
+
+
+    Space complexity: O(1)
+        def sum(a: int, b: int):
+            return a + b
+
+        Fungsi tersebut tidak membuat alokasi memori baru / variabel tambahan yang bertambah besar seiring bertambahnya input.
+        Jadi hanya constant, tidak bergantung pada input.
+
+        Example space complexity: O(n)
+        def fill(n: int):
+            results = []
+            for i in range(n):
+                results.append(i)
+
+        ->  fill(10) # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+        Space memory dari `results` akan bertambah seiring makin besarnya `n`
+
+    Contoh Space complexity - O(1) lainnya:
+        - def length(items: list):
+            '''
+            Time complexity: O(n)
+            Space complexity: O(1)
+            '''
+            total = 0
+            for i in items:
+                total += 1
+            return total
+
+        - def is_include(items: list, target: int):
+            '''
+            Time complexity: O(n)
+            Space complexity: O(1)
+            '''
+            contained = False
+            for val in items:
+                if target == val:
+                    contained = True
+                    break;
+            return contained
     """
-    def find_max_price(items: list):
-        # Suppose we already know which index that have the largest or smallest price
-        # [78, 180, 317, 512] -> Max: index 2
-        return items[3] # is constant, meaning it doesn't depend on the input size. Always one step operations
+    def sum(a: int, b: int):
+        """
+        Time complexity: O(1)
+        Space complexity: O(1)
+        """
+        return a + b
 
     return (
-        ('find_max_price', find_max_price(items))
+        ('sum', sum(1, 2)),
     )
-
-def logaritmic_big_o(items: list):
-    """
-    O(log n) - Logarithmic Time
-    -> ketika kita memberikan input sebesar n terhadap sebuah fungsi, jumlah tahapan yang dilakukan oleh fungsi tersebut berkurang berdasarkan suatu faktor.
-    """
-    def find_max_price(items: list) -> int:
-        return _find_max_price(items, 0, len(items) - 1)
-
-    def _find_max_price(items: list, left: int, right: int) -> int:
-        if left == right:
-            return items[left]
-
-        mid = (left + right) // 2
-
-        left_max = _find_max_price(items, left, mid)
-        right_max = _find_max_price(items, mid + 1, right)
-
-        return max(left_max, right_max)
-
-    return (
-        ('find_max_price', find_max_price(items))
-    )
-
 
 def run():
-    print('On²', quadratic_big_o(data))
-    print('O(n)', linear_big_o(data))
-    print('O(1)', constant_big_o(data))
-    print('O(log n)', logaritmic_big_o(data))
+    print('O(1)', constant_big_o())

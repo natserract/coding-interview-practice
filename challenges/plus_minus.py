@@ -3,7 +3,8 @@
 ##############
 def plusMinus_1(arr):
     """
-    O(n) - Linear Time
+    Time complexity: O(n) - Linear Time
+    Space complexity: O(1) - Constant Time
     """
     positive, negative, zero = (0, 0, 0)
     for v in arr:

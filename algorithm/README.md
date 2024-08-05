@@ -31,5 +31,4 @@ yang mengikuti faktorial dari ukuran masalah yang diberikan. Contoh: algoritma b
 yang mencoba semua permutasi dari sebuah himpunan data.
 
 ## References
-- https://rizafahmi.com/2020/03/21/notasi-o-besar-big-o-notation/
-- https://medium.com/bee-solution-partners/penjelasan-sederhana-tentang-time-complexity-dan-big-o-notation-4337ba275cfe
+- https://medium.com/99ridho/mengenal-dan-menghitung-time-complexity-dan-space-complexity-6418ea767336
