@@ -4,6 +4,7 @@ import algorithm.big_o as BigO
 import challenges.plus_minus as ChallengePlusMinus
 import challenges.challenges_eval as ChallengeEval
 import challenges.array as ChallengeArray
+import challenges.recursive as ChallengeRecursive
 
 if __name__ == "__main__":
     List.run()
@@ -12,3 +13,4 @@ if __name__ == "__main__":
     ChallengePlusMinus.run()
     ChallengeEval.run()
     ChallengeArray.run()
+    ChallengeRecursive.run()

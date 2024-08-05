@@ -43,6 +43,14 @@ def reverse_array(arr: list):
 
     return arr
 
+def middle(arr: list):
+    """
+    Time complexity: O(1)
+    Space complexity: O(1)
+    """
+    return arr[len(arr) // 2]
+
 def run():
-    data = [1, 2, 3, 4, 5]
+    data = [1, 9, 2, 3, 6, 4, 5]
     print('reverse_array', reverse_array(data))
+    print('middle', middle(data))

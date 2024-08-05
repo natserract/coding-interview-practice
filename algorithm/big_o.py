@@ -8,7 +8,7 @@ f(n) =
 
 Constant: O(1)
 Linear time: O(n)
-Logarithmic time: O(n log n)
+Loglinear time: O(n log n)
 Quadratic time: O(n^2)
 Exponential time: O(2^n)
 Factorial time: O(n!)
@@ -139,6 +139,56 @@ def linear_big_o():
     return (
         ('for_each', for_each(print, [1, 5, 3]))
     )
+
+def loglinear_big_o():
+    def _reverse_array(arr: list):
+        start = 0
+        end = len(arr) - 1
+
+        while start < end:
+            arr[start], arr[end] = arr[end], arr[start] # swap
+            start += 1
+            end -= 1
+
+        return arr
+
+    """
+    O(n log n)
+    -> Waktu eksekusi operasi `log n` akan terjadi sebanyak `n` (jumlah input) kali
+
+      Operasi `log n`: sorted()
+        -> Operasi sorting bergantung pada seberapa besar jumlah input nya (n)
+
+      `n`: length of items
+    """
+    def for_each(fn: Callable[[int], None], items: list) -> list:
+        """
+        Time complexity: O(n log n)
+        Space complexity: O(n)
+        """
+        sorted_items = sorted(items) # O(n log n)
+
+        for item in sorted_items:
+            fn(item) # O(n)
+
+        return sorted_items
+
+    def find_max(items: list):
+        """
+        Time complexity: O(n log n)
+        Space complexity: O(n)
+        """
+        sorted_items = sorted(items) # O(n log n)
+        sorted_items = _reverse_array(sorted_items) # O(n)
+        return sorted_items[0] #O(1
+
+    return (
+        ('for_each', for_each(print, [2, 1, 5, 7, 4])),
+        ('find_max', find_max([2, 1, 5, 7, 4]))
+    )
+
+
 def run():
     print('O(1)', constant_big_o())
     print('O(n)', linear_big_o())
+    print('O(n log n)', loglinear_big_o())
