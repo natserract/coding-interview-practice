@@ -30,7 +30,7 @@ from typing import Callable
 
 def constant_big_o():
     """
-    O(1) - Constant Time
+    O(1) - Constant
     -> Banyaknya input yang diberikan kepada sebuah algoritma, tidak akan mempengaruhi waktu proses (runtime) dari algoritma tersebut.
 
     Time Complexity: O(1)
@@ -121,5 +121,24 @@ def constant_big_o():
         ('sum', sum(1, 2)),
     )
 
+def linear_big_o():
+    """
+    O(n) - Linear
+    -> Waktu eksekusi operasi bertambah seiring bertambahnya jumlah input
+    """
+    def for_each(fn: Callable, items: list):
+        """
+        Time complexity: O(n)
+        Space complexity: O(1) / depends on `fn`
+        """
+        for i in range(len(items)):
+            fn(items[i])
+
+        return items
+
+    return (
+        ('for_each', for_each(print, [1, 5, 3]))
+    )
 def run():
     print('O(1)', constant_big_o())
+    print('O(n)', linear_big_o())
