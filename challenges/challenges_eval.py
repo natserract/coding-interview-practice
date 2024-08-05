@@ -159,6 +159,8 @@ def sort_binary_string(text: str):
 
        2. Statement: head > tail, untuk memastikan posisi tail tidak overlap dari head nya. Minimal, sama atau lebih.
           Contoh case: 111010, 3 angka yang sama di depan.
+
+    - If the all inputs integer, use `bubble_sort` instead
     """
     head, tail = 0, 0
 

@@ -187,8 +187,24 @@ def loglinear_big_o():
         ('find_max', find_max([2, 1, 5, 7, 4]))
     )
 
+def quadratic_big_o():
+    """
+    O(n^2)
+    """
+    def bubble_sort(arr):
+        for i in range(len(arr)):
+            for j in range(i+1, len(arr)):
+                if arr[i] < arr[j]:
+                    arr[i], arr[j] = arr[j], arr[i]
+
+        return arr
+
+    return (
+        ('bubble_sort', bubble_sort([1,2,4,5,3]))
+    )
 
 def run():
     print('O(1)', constant_big_o())
     print('O(n)', linear_big_o())
-    print('O(n log n)', loglinear_big_o())
+    print('O(n log n)', loglinear_big_o(),)
+    print('O(n^2)', quadratic_big_o())
