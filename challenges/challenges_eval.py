@@ -1,6 +1,10 @@
 import re
 
 def read_number_of_spaces(text: str):
+    """
+    Time complexity: O(n)
+    Space complexity: O(1)
+    """
     spaces = 0
     for s in text:
         if s == " ":
@@ -9,27 +13,31 @@ def read_number_of_spaces(text: str):
     return spaces
 
 def remove_unecessary_spaces(text: str, pattern = "[.]"):
-    word = ""
-
-    groups = text.split(' ')
-    for i, w in enumerate(groups):
-        if w != "":
-            normalized_word = re.sub(rf'{pattern}', '', w)
-            if i > 0:
-                word += " "
-            word += normalized_word
-
-    return word
+    """
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+    text = re.sub(rf'{pattern}', '', text)
+    text = ' '.join(text.split())
+    return text
 
 def swap(arr, i, j):
+    '''same as
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+    '''
     arr[i], arr[j] = arr[j], arr[i]
 
 def sort_binary_string(text: str):
     """
+    Time complexity: O(n)
+    Space complexity: O(n)
+
     Workflow:
     Input: 1 0 0 1 1 0
 
-    - Cari angka 1 di masing2 index,
+    - Check angka 1 dan 0 di setiap iterasi
     - Case diatas, terdapat 3 jumlah angka 1, dan 3 jumlah angka 0
     - Angka 1 -> muncul pada index: 0, 3, 4
     - Angka 0 -> muncul pada index 1, 2, 5
@@ -168,20 +176,21 @@ def sort_binary_string(text: str):
             swap(arr, i, tail)
             tail += 1
 
-        print('Iterasi', head, tail)
-
     return ''.join(arr)
 
 def vowels(text: str):
+    """
+    Time complexity: O(n)
+    Space complexity: O(1)
+    """
     count = 0
-
     structure = 'aeuio'
     for w in text:
-        w = w.lower()
-        if w in structure:
+        if w.lower() in structure:
             count += 1
 
     return count
 
 def run():
     print('sort_binary_string', sort_binary_string("100110")) #111000
+    print('remove_unecessary_spaces', remove_unecessary_spaces('    Jack in    America.  '))
