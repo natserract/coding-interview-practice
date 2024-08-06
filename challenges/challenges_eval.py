@@ -193,6 +193,35 @@ def vowels(text: str):
 
     return count
 
+def fizz_buzz(n: int) -> list:
+    """
+    Input: 5
+    Output: [1, 2, "Fizz", 4, "Buzz"]
+
+    Input: 15
+    Output: [1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz", 11, "Fizz", 13, 14, "FizzBuzz"]
+
+    Time complexity: O(n)
+    Space complexity: O(n)
+    """
+    results = []
+    for i in range(1, n+1):
+        # Fizz
+        if i % 3 == 0:
+            results.append("Fizz")
+
+        # Buzz
+        elif i % 5 == 0:
+            results.append("Buzz")
+
+        else:
+            results.append(i)
+
+    return results
+
 def run():
     print('sort_binary_string', sort_binary_string("100110")) #111000
+    print('read_number_of_spaces', read_number_of_spaces('    Jack in    America'))
     print('remove_unecessary_spaces', remove_unecessary_spaces('    Jack in    America.  '))
+    print('vowels', vowels('google'))
+    print('fizz_buzz', fizz_buzz(15))

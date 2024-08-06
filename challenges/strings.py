@@ -5,6 +5,9 @@ def reverse_string(text: str):
 
     Input: 'how are you'
     Output: 'uoy era woh'
+
+    Time complexity: O(n)
+    Space complexity: O(n)
     """
     arr = [t for t in text]
     start = 0
