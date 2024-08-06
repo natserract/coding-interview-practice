@@ -187,8 +187,16 @@ def vowels(text: str):
     """
     count = 0
     structure = 'aeuio'
+
+    vowels_dict = {
+        'a': True, 'A': True,
+        'e': True, 'E': True,
+        'i': True, 'I': True,
+        'o': True, 'O': True,
+        'u': True, 'U': True
+    }
     for w in text:
-        if w.lower() in structure:
+        if w in vowels_dict:
             count += 1
 
     return count

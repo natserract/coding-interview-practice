@@ -46,7 +46,7 @@ def mini_max_sum(arr: list[int]):
 
     print('mini_max_sum', min(results), max(results))
 
-def mini_max_sum_optimized(arr: list[int])
+def mini_max_sum_optimized(arr: list[int]):
     """
     Time complexity: O(n)
     Space complexity: O(1)
