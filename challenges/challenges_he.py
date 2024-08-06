@@ -46,6 +46,21 @@ def mini_max_sum(arr: list[int]):
 
     print('mini_max_sum', min(results), max(results))
 
+def mini_max_sum_optimized(arr: list[int])
+    """
+    Time complexity: O(n)
+    Space complexity: O(1)
+    """
+    total_sum = sum(arr) # O(n)
+    min_value = min(arr) # O(n)
+    max_value = max(arr) # O(n)
+
+    min_sum = total_sum - max_value
+    max_sum = total_sum - min_value
+
+    print('mini_max_sum_optimized', min_sum, max_sum)
+
 def run():
     plus_minus([-4, 3, -9, 0, 4, 1])
     mini_max_sum([1, 2, 3, 4, 5])
+    mini_max_sum_optimized([1, 2, 3, 4, 5])
