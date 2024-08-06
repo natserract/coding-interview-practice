@@ -15,6 +15,11 @@ def iterations(items: list):
         v for v in items
     ]
 
+    # inline condition for loop
+    forloop_inline_iter_cond = [
+        v.upper() if v =='red' else v for v in items
+    ]
+
     # while loop
     i = 0
     whileloop_iter = []
@@ -22,7 +27,7 @@ def iterations(items: list):
         whileloop_iter.append(items[i])
         i += 1
 
-    return forloop_iter, forloop_inline_iter, whileloop_iter
+    return forloop_iter, forloop_inline_iter, forloop_inline_iter_cond, whileloop_iter
 
 def range_list(end = 10):
     values = []
